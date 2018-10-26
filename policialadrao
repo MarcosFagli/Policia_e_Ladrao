@@ -1,7 +1,3 @@
-%Fatos iniciais
-policial(1,3).
-
-
 %escada possui andar abaixo, andar acima, e posicao x
 escada(1,2,4).
 escada(2,3,1).
@@ -21,13 +17,13 @@ carrinho(8,2).
 livreDireita(Xp,Yp,Xl) :- Xp1 is Xp+1, Xp2 is Xp+2, carrinho(Xp1,Yp), not(carrinho(Xp2,Yp)), not(escada(Yp,_,Xp2)), not(escada(_,Yp,Xp2)), Xp2 =\= Xl, write("2").
 
 %3
-livreDireita(Xp,Yp,_) :- Xp1 is Xp+1, not(carrinho(Xp1,Yp)), write("3").
+livreIDireita(Xp,Yp,_) :- Xp1 is Xp+1, not(carrinho(Xp1,Yp)), write("3").
 
 %4
 livreEsquerda(Xp,Yp,Xl) :- Xp1 is Xp-1, Xp2 is Xp-2, carrinho(Xp1,Yp), not(carrinho(Xp2,Yp)), not(escada(Yp,_,Xp2)), not(escada(_,Yp,Xp2)), Xp2 =\= Xl, write("4").
 
 %5
-livreEsquerda(Xp,Yp,_) :- Xp1 is Xp-1, not(carrinho(Xp1,Yp)), write("5").
+livreIEsquerda(Xp,Yp,_) :- Xp1 is Xp-1, not(carrinho(Xp1,Yp)), write("5").
 
 pertence(Elem, [Elem|_]):- write("pertence1").
 pertence(Elem, [_|Cauda]):- write("pertence2"), pertence(Elem, Cauda).
@@ -36,10 +32,10 @@ inserir_primeiro(N, M, [N|M]).
 
 %acoes
 %6
-acao(aDireita, L, estado(Xp1,Yp,Xl,Yl), estado(Xp2,Yp,Xl,Yl)) :- write("aDireita"), write(L), Xp1 < 10, livreDireita(Xp1,Yp,Xl), Xp2 is Xp1+1, not(pertence([d,Xp2,Yp],L)), inserir_primeiro(L,[d,Xp2,Yp],L), write("6").
+acao(aDireita, L, L1, estado(Xp1,Yp,Xl,Yl), estado(Xp2,Yp,Xl,Yl)) :- write("aDireita"), write(L), Xp1 < 10, livreIDireita(Xp1,Yp,Xl), Xp2 is Xp1+1, not(pertence([d,Xp2,Yp],L)), inserir_primeiro([d,Xp2,Yp],L,L1), write("6").
 
 %7
-acao(aEsquerda, L, estado(Xp1,Yp,Xl,Yl), estado(Xp2,Yp,Xl,Yl)) :- write("aEsquerda"), write(L), Xp1 > 1, livreEsquerda(Xp1,Yp,Xl), Xp2 is Xp1-1, not(pertence([e,Xp2,Yp],L)), L is [[e,Xp2,Yp]|L], write("7").
+acao(aEsquerda, L, estado(Xp1,Yp,Xl,Yl), estado(Xp2,Yp,Xl,Yl)) :- write("aEsquerda"), write(L), Xp1 > 1, livreIEsquerda(Xp1,Yp,Xl), Xp2 is Xp1-1, not(pertence([e,Xp2,Yp],L)), write("7").
 
 %8
 acao(subir, estado(Xp,Yp1,Xl,Yl), estado(Xp,Yp2,Xl,Yl)) :- write("subir"), Yp1 < 5, escada(Yp1,Yp2,Xp), write("8").
@@ -57,8 +53,8 @@ acao(pularCarrinhoE, estado(Xpe,Yp,Xl,Yl), estado(Xps,Yp,Xl,Yl)) :- write("pular
 %Estrutura do estado
 %estado(Xpolicial,Ypolicial,Xladrao,Yladrao).
 %1
-consegue(estado(X,Y,X,Y)):- write("1").
+consegue(_, estado(X,Y,X,Y)):- write("1").
 
 
 %Chamar consegue com estado inicial do ladrao
-consegue(estado(X,Y,Z,W)) :- acao(_, [[i,X,Y]], estado(X,Y,Z,W), Estado1), consegue(Estado1).
+consegue(L, estado(X,Y,Z,W)) :- acao(_, L, L1, estado(X,Y,Z,W), Estado1), consegue(L1, Estado1).

@@ -32,7 +32,7 @@ prolog.assertz("escada(1,2,4)")
 prolog.assertz("escada(2,3,1)")
 prolog.assertz("escada(3,4,9)")
 prolog.assertz("escada(4,5,6)")
-prolog.assertz("escada(1,2,10)")
+prolog.assertz("escada(1,2,9)")
 prolog.assertz("escada(2,5,3)")
 
 #posicionamento dos carrinhonhos (x,y)
@@ -63,10 +63,10 @@ prolog.assertz("pertence(Elem, [_|Cauda]):- pertence(Elem, Cauda)")
 
 #Acoes
 #7 - Ação de andar para a direita
-prolog.assertz("acao(aDireita, L, [[d,Xp2,Yp]|L], estado(Xp1,Yp,Xl,Yl), estado(Xp2,Yp,Xl,Yl)) :- Xp1 < 10, livreIDireita(Xp1,Yp), Xp2 is Xp1+1, not(pertence([d,Xp2,Yp],L))")
+prolog.assertz("acao(aDireita, L, [[d,Xp2,Yp]|L], estado(Xp1,Yp,Xl,Yl), estado(Xp2,Yp,Xl,Yl)) :- Xp1 < 9, livreIDireita(Xp1,Yp), Xp2 is Xp1+1, not(pertence([d,Xp2,Yp],L))")
 
 #8 - Ação de pular um carrinho quando esta a direita do policial
-prolog.assertz("acao(pularCarrinhoD, L, [[pcd,Xps,Yp]|L], estado(Xpe,Yp,Xl,Yl), estado(Xps,Yp,Xl,Yl)) :- Xpe > 2, Xp1 is Xpe+1, Xps is Xpe+2, carrinho(Xp1,Yp), livreDireita(Xpe,Yp,Xl,Yl), not(pertence([pcd,Xps,Yp],L))")
+prolog.assertz("acao(pularCarrinhoD, L, [[pcd,Xps,Yp]|L], estado(Xpe,Yp,Xl,Yl), estado(Xps,Yp,Xl,Yl)) :- Xpe > 1, Xp1 is Xpe+1, Xps is Xpe+2, carrinho(Xp1,Yp), livreDireita(Xpe,Yp,Xl,Yl), not(pertence([pcd,Xps,Yp],L))")
 
 #11 - Ação de subir na escada
 prolog.assertz("acao(subir, L, [[s,Xp,Yp2]|L], estado(Xp,Yp1,Xl,Yl), estado(Xp,Yp2,Xl,Yl)) :- Yp1 < 5, escada(Yp1,Yp2,Xp), not(pertence([s,Xp,Yp1],L))")
@@ -75,7 +75,7 @@ prolog.assertz("acao(subir, L, [[s,Xp,Yp2]|L], estado(Xp,Yp1,Xl,Yl), estado(Xp,Y
 prolog.assertz("acao(aEsquerda, L, [[e,Xp2,Yp]|L], estado(Xp1,Yp,Xl,Yl), estado(Xp2,Yp,Xl,Yl)) :- Xp1 > 1, livreIEsquerda(Xp1,Yp), Xp2 is Xp1-1, not(pertence([e,Xp2,Yp],L))")
 
 #10 - Ação de pular um carrinho quando esta a esquerda do policial
-prolog.assertz("acao(pularCarrinhoE, L, [[pce,Xps,Yp]|L], estado(Xpe,Yp,Xl,Yl), estado(Xps,Yp,Xl,Yl)) :- Xpe < 9, Xp1 is Xpe-1, Xps is Xpe-2, carrinho(Xp1,Yp), livreEsquerda(Xpe,Yp,Xl,Yl), not(pertence([pce,Xps,Yp],L))")
+prolog.assertz("acao(pularCarrinhoE, L, [[pce,Xps,Yp]|L], estado(Xpe,Yp,Xl,Yl), estado(Xps,Yp,Xl,Yl)) :- Xpe < 8, Xp1 is Xpe-1, Xps is Xpe-2, carrinho(Xp1,Yp), livreEsquerda(Xpe,Yp,Xl,Yl), not(pertence([pce,Xps,Yp],L))")
 
 #12 - Ação de descer da escada
 prolog.assertz("acao(descer, L, [[d,Xp,Yp2]|L], estado(Xp,Yp1,Xl,Yl), estado(Xp,Yp2,Xl,Yl)) :- Yp1 >= 0, escada(Yp2,Yp1,Xp), not(pertence([d,Xp,Yp2],L))")
@@ -93,4 +93,15 @@ prolog.assertz("solucao(estado(X,Y,Z,W), L) :- acao(_, [[i,X,Y]], L1, estado(X,Y
 
 x = list(prolog.query("solucao(estado(1,1,9,1), X)"))
 
-print(x)
+resposta = str(x[0])
+
+tam = len(resposta)
+
+respostaTratada = resposta[6:tam-1]
+respostaLista = []
+i=1
+
+while(i < tam):
+	respostaLista.append(respostaTratada[i:i+22])
+	i = i+24
+

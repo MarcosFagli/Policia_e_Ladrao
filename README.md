@@ -26,3 +26,35 @@ b) A escada permite a subida ou descida.
 c) O escorregador permite apenas descida.
 d) O carrinho é um obstáculo que o personagem deve “pular”.
 e) O personagem só pode “pular” o carrinho se as posições adjacentes estiverem vazias.
+
+## Execução do código
+### Código em prolog
+
+Para executar o código em prolog basta abrir o SWI-PROLOG e importar a base de conhecimento
+
+```
+?- ['policialadrao'].
+```
+
+Então a base de conhecimento será importada. Para executar o procedimento de busca, basta digitar:
+
+```
+?- solucao(estado(X,Y,Z,W), K).
+```
+
+Onde X é a coordenada x do policial, Y é a coordenada y do policial, Z é a coordenada x do ladrao, W é a coordenada y do ladrao e K é a lista de caminhos tomados pelo policial para chegar ao ladrao, neste, passar um parametro com a inicial maiuscula, pois será uma váriavel, por onde será retornado o resultado.
+
+### Código em Python
+
+Para executar o código em pyhton é necessário ter instalado o python 3 e o pyswip.
+Para instalar o pyswip (linux MINT 19):
+
+```
+~$ sudo pip3 install pyswip
+```
+
+Uma vez instalado, basta executar no terminal:
+
+```
+$ python3 busyPolice.py
+```

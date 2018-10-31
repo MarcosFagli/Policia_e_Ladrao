@@ -4,6 +4,8 @@ Trabalho em homenagem ao jogo "Atari Busy Police", apresentado a disciplina de I
 
 Disciplina cursada no oitavo semestre do curso e ministrada pelo Docente Doutor Murillo Naldi.
 
+Agradecimento a Yuce (https://github.com/yuce) pela biblioteca pyswip encontrada em https://github.com/yuce/pyswip, possibilitando a utilização da interface gráfica pyQt em python para demonstrativo dos resultados obtidos no prolog
+
 ## Objetivo
 
 O jogo acontece em um supermercado de dimensões 10 (no eixo horizontal) e 5 (no eixo vertical) onde o policial é o personagem principal e deve encontrar seu caminho até o ladrão, passando por obstáculos.

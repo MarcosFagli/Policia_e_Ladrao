@@ -6,14 +6,16 @@ Disciplina cursada no oitavo semestre do curso e ministrada pelo Docente Doutor 
 
 Agradecimento a Yuce (https://github.com/yuce) pela biblioteca pyswip encontrada em https://github.com/yuce/pyswip, possibilitando a utilização da interface gráfica pyQt em python para demonstrativo dos resultados obtidos no prolog
 
+Utilização da biblioteca Tkinter para manipulação de elementos gráficos
+
 ## Objetivo
 
-O jogo acontece em um supermercado de dimensões 10 (no eixo horizontal) e 5 (no eixo vertical) onde o policial é o personagem principal e deve encontrar seu caminho até o ladrão, passando por obstáculos.
+O jogo acontece em um supermercado de dimensões 10 (no eixo horizontal) e 5 (no eixo vertical) onde o policial(Fantasma) é o personagem principal e deve encontrar seu caminho até o ladrão(PacMan), passando por obstáculos.
 
 O jogo foi composto por 5 entidades:
 a) Policial
 b) Ladrão
-c) Carrinho de compras
+c) Carrinho de compras (Cerejas)
 d) Escada
 e) Escorregador
 
@@ -46,11 +48,19 @@ Onde X é a coordenada x do policial, Y é a coordenada y do policial, Z é a co
 
 ### Código em Python
 
-Para executar o código em pyhton é necessário ter instalado o python 3 e o pyswip.
+Para executar o código em pyhton é necessário ter instalado o python 3, pyswip e PyQt (verificar no site a forma de instalação.
 Para instalar o pyswip (linux MINT 19):
 
 ```
 ~$ sudo pip3 install pyswip
+```
+
+É necessário também a instalação da biblioteca Tkinter e PIL, para a exibição e manipulação da interface gráfica:
+
+```
+sudo apt-get update
+sudo apt-get install python3-tk
+sudo apt-get install python3-pil python3-pil.imagetk
 ```
 
 Uma vez instalado, basta executar no terminal:

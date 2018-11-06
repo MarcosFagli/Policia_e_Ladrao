@@ -4,13 +4,14 @@ escada(2,3,1).
 escada(3,4,9).
 escada(4,5,6).
 escada(1,2,10).
-escada(2,5,3).
+%escada(2,5,3).
 
 
 %posicionamento dos carrinhonhos (x,y)
 carrinho(4,3).
 carrinho(6,1).
 carrinho(4,5).
+carrinho(3,5).
 carrinho(8,2).
 
 

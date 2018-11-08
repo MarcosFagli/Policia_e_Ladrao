@@ -1,10 +1,11 @@
 %escada possui andar abaixo, andar acima, e posicao x
 escada(1,2,4).
-escada(2,3,1).
 escada(3,4,9).
 escada(4,5,6).
 escada(1,2,10).
-%escada(2,5,3).
+escada(2,5,3).
+
+elevador(1)
 
 
 %posicionamento dos carrinhonhos (x,y)

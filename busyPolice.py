@@ -32,9 +32,8 @@ from PIL import ImageTk, Image
 #Biblioteca time para efeitos na interface
 import time
 
-
-
-def temEscada(escada, coluna, linha):
+#Utilização para a interface gráfica
+def temEscada(esctimeada, coluna, linha):
 	for i in range (0, len(escada)):
 		if(escada[i][1] == linha and escada[i][2] == coluna):
 			return True
@@ -43,12 +42,33 @@ def temEscada(escada, coluna, linha):
 	return False
 
 
+#Tentativa de definir a posição do policial e do ladrao dinamicamente
+master = Tk()
+master.title("Seleção das posições")
+Label(master, text="Policial (X,Y)").grid(row=0)
+Label(master, text="Ladrao   (X,Y)").grid(row=1)
+
+e1 = Entry(master)
+e2 = Entry(master)
+e3 = Entry(master)
+e4 = Entry(master)
+
+e1.grid(row=0, column=1)
+e2.grid(row=0, column=2)
+e3.grid(row=1, column=1)
+e4.grid(row=1, column=2)
+
+Button(master, text='Iniciar', command=master.quit).grid(row=5, column=1, sticky=W, pady=3)
+
+mainloop( )
 
 #Auxiliares para posicionamento do ladrao e do policial
-policiaX = 8
-policiaY = 5
-ladraoX = 1
-ladraoY = 5
+policiaX = int(e1.get())
+policiaY = int(e2.get())
+ladraoX = int(e3.get())
+ladraoY = int(e4.get())
+
+master.destroy()
 
 #Instanciação do prolog para utilizar a máquina de inferencia python
 prolog = Prolog()
@@ -60,7 +80,7 @@ for i in range(0,len(carrinho)):
 	prolog.assertz("carrinho(" + str(carrinho[i][0]) + "," + str(carrinho[i][1]) + ")")
 
 
-#escada possui andar abaixo, andar acima, e posicao x ,[2,5,3]
+#escada possui andar abaixo, andar acima, e posicao x   ,[2,5,3] 
 escada = [[1,2,4],[2,3,1],[3,4,9],[4,5,6],[1,2,10]]
 
 for i in range(0,len(escada)):
@@ -139,6 +159,8 @@ if(x != []):
 
 	#Instanciação do objeto TK para interface gráfica
 	root = Tk()
+	root.title("Demonstrativo do caminho")
+	Button(root, text='Quit', command=root.quit).grid(row=6, column=5, sticky=W, pady=3)
 
 	#Configurando as camadas de exibição
 	imgbranco = ImageTk.PhotoImage(Image.open("Image/branco.png"))
@@ -201,14 +223,23 @@ if(x != []):
 		root.update_idletasks()
 		root.update()
 
-		time.sleep(1)
+		time.sleep(0.5)
 
+	root.mainloop()
+
+	root.destroy()
+
+	root = Tk()
+	root.title("Relatorio")
+	Label(root, text="Fantasma WIN").grid(row=0)
+	Label(root, text="Foi possivel encontrar um caminho").grid(row=1)
 	root.mainloop()
 
 else:
 	#Instanciação do objeto TK para interface gráfica
 	root = Tk()
-	root2 = Tk()
+	root.title("Demonstrativo do caminho")
+	Button(root, text='Quit', command=root.quit).grid(row=6, column=5, sticky=W, pady=3)
 
 	#Configurando as camadas de exibição
 	imgbranco = ImageTk.PhotoImage(Image.open("Image/branco.png"))
@@ -237,10 +268,16 @@ else:
 	#Criando a camada do policial
 	imglabel2 = Label(root, image=imgpoli).grid(row=5-policiaY, column=policiaX-1)
 	imglabel2 = Label(root, image=imgladrao).grid(row=5-ladraoY, column=ladraoX-1)
-	imglabel3 = Label(root2, image=imgbranco).grid(row=1, column=1)
 
 	#Exibindo imagem inicial
-	root2.update_idletasks()
-	root2.update()
 	root.mainloop()
+	root.destroy()
+
+	root = Tk()
+	root.title("Relatorio")
+	Label(root, text="Pac-Man WIN").grid(row=0)
+	Label(root, text="Não foi possivel encontrar um caminho").grid(row=1)
+	root.mainloop()
+
+
 
